@@ -1,0 +1,159 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.maidsafe.test</groupId>
+	<artifactId>Testapp</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Testapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<defaultGoal>integration-test</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<version>3.2.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<libraries>
+						<library>
+							<type>executable</type>
+							<run>true</run>
+						</library>
+					</libraries>
+					<linker>
+						<name>g++</name>
+					</linker>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>OS1</id>
+			<activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<configuration>
+									<tasks>
+										<copy todir="bin" flatten="true">
+											<fileset dir="target">
+												<include name="**/*dll" />
+											</fileset>
+										</copy>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<id>download-glassfish</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>download-single</goal>
+								</goals>
+								<configuration>
+									<url>http://download.java.net</url>
+									<fromFile>glassfish/3.1/release/glassfish-3.1.zip</fromFile>
+									<toDir>${project.build.directory}/glassfish</toDir>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>OS2</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<configuration>
+									<tasks>
+										<copy todir="bin" flatten="true">
+											<fileset dir="target">
+												<include name="**/*so" />
+												<include name="**/*test-app" />
+											</fileset>
+										</copy>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<id>download-glassfish</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>download-single</goal>
+								</goals>
+								<configuration>
+									<url>http://download.java.net</url>
+									<fromFile>glassfish/3.1/release/glassfish-3.1.zip</fromFile>
+									<toDir>${project.build.directory}/glassfish</toDir>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>
