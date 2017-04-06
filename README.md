@@ -10,8 +10,8 @@ Wired up an example to demonstrate maven for managing dependency download throug
    ```
     mvn clean install
     ```
- This will download all the required dependencies as given in pom.xml. 
- To customise the URL and download directory.Modify the plugin as provided in the comment.
+   This will download all the required dependencies as given in pom.xml. 
+   <br/> To customise the URL and download directory.Modify the plugin as provided in the comment.<br/>
 6. Edit the BASE URL, PATH and DOWNLOAD DIRECTORY in the plugin in pom.xml.
 7. Profile managment based on Operating System and all required profiles are issued in pom.xml. 
  
