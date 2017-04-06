@@ -35,8 +35,7 @@ Wired up an example to demonstrate maven for managing dependency download throug
    				
          
    				</plugin> 
-       ```  
-          
+
           
 
 
