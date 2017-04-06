@@ -29,11 +29,11 @@ Wired up an example to demonstrate maven for managing dependency download throug
          </goals>
          <configuration>
             <url>http://download.java.net</url>
-            //Edit the BASE URL of your hosted download file
+            <!---Edit the BASE URL of your hosted download file--->
             <fromFile>glassfish/3.1/release/glassfish-3.1.zip</fromFile>
-            //Edit the path of your download file content
+            <!---Edit the path of your download file content--->
             <toDir>${project.build.directory}/glassfish</toDir>
-            //Provide a directory to save the downloaded file
+            <!---Provide a directory to save the downloaded file--->
          </configuration>
       </execution>
    </executions>
