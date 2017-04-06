@@ -41,4 +41,4 @@ Wired up an example to demonstrate maven for managing dependency download throug
 ```
   ## TODO 
 1.  Approaches to create isolated dev and production environment profiles using mvn commandline argument is in progress.
-2.  ```mvn deploy``` distribution managment argument to be added in pom.xml
+2.  ```mvn deploy``` distribution management argument to be added in pom.xml
